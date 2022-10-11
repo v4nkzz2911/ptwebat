@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot password</title>
+    <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
     <div class="login-form">
-        <h1>Forgot Form</h1>
+        <h1>Quên mật khẩu</h1>
         <form action="/password/email" method="POST">
             <input type="text" name="email" placeholder="Email" 
                 <% if (typeof email != "undefined" && email) { %> value="<%= email %>"<% } %>  required>
-            <input type="submit">
+            <input type="submit" value="Thực hiện">
         </form>
     </div>
 </body>

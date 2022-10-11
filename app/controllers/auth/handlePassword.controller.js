@@ -1,6 +1,7 @@
 const User = require('../../models/user.model');
 const bcrypt = require('bcrypt');
 const mailer = require('../../utils/mailer');
+const passgen = require('../../utils/passgen');
 
 exports.showForgotForm = (req, res) => {
     res.render('auth/passwords/email');
@@ -14,9 +15,18 @@ exports.sendResetLinkEmail = (req, res) => {
             if (!user) {
                 res.redirect('/password/reset')
             } else {
-                bcrypt.hash(user.email, parseInt(process.env.BCRYPT_SALT_ROUND)).then((hashedEmail) => {
-                    mailer.sendMail(user.email, "Reset password", `<a href="${process.env.APP_URL}/password/reset/${user.email}?token=${hashedEmail}"> Reset Password </a>`)
-                    console.log(`${process.env.APP_URL}/password/reset/${user.email}?token=${hashedEmail}`);
+                const resetPass = passgen(8,true,true);
+                console.log(resetPass);
+                bcrypt.hash(resetPass, parseInt(process.env.BCRYPT_SALT_ROUND)).then((hashedPassword) => {
+                    User.resetPassword(req.body.email, hashedPassword, (err, result) => {
+                        if (!err) {
+                            //res.redirect('/login');
+                        } else {
+                            res.redirect("/500");
+                        }
+                    })
+                    mailer.sendMail(user.email, "Reset password", `Reset Pass: ${resetPass}`)
+                    console.log(`${process.env.APP_URL}/password/reset/${user.email} ${resetPass}`);
                 })
                 res.redirect('/password/reset?status=success')
             }
@@ -41,8 +51,17 @@ exports.showChangePasswordForm = (req, res) => {
 exports.change = (req, res) => {
     const { passwordOld, passwordNew, passwordRetype} = req.body;
     console.log(passwordOld, passwordNew, passwordRetype);
+
+    const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    const r  = passwordNew.match(re);
+
     if (passwordNew != passwordRetype) { 
         const conflictError = 'Hai mật khẩu mới nhập không trùng nhau';
+        res.render('auth/passwords/change', { conflictError });
+        
+    } 
+    if (!r) { 
+        const conflictError = 'Mật khẩu mới không đủ độ mạnh';
         res.render('auth/passwords/change', { conflictError });
         
     } 

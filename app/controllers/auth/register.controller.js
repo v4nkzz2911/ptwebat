@@ -10,13 +10,22 @@ exports.create = (req, res) => {
 exports.register = (req, res) => {
     const {username, name, password, passwordretype, email, phone, address } = req.body;
 
+    const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    const r  = password.match(re);
+    
     if (password!=passwordretype) {
         
         // A user with that email address does not exists
         const conflictError = 'Hai mật khẩu không khớp.';
-        res.render('auth/register', { email, password, name, conflictError });
+        res.render('auth/register', {conflictError });
     } 
-
+    else
+    if (!r){
+        
+        const conflictError = 'Mật khẩu không đủ độ mạnh.';
+        res.render('auth/register', {conflictError });
+    }
+    else
     if (email && password && name) {
         User.findByEmail(email, (err, user) => {
             if (err || user) {
