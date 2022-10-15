@@ -44,6 +44,8 @@ exports.register = (req, res) => {
                 password: hashed,
                 phone: phone,
                 address: address,
+                isForgot: "0",
+                role: "1",
             });
             User.create(user, (err, user) => {
                 if (!err) {

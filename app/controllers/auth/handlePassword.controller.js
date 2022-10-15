@@ -25,6 +25,13 @@ exports.sendResetLinkEmail = (req, res) => {
                             res.redirect("/500");
                         }
                     })
+                    User.updateisForgotPasswordStatus1(req.body.email, (err, result) => {
+                        if (!err) {
+                            //res.redirect('/login');
+                        } else {
+                            res.redirect("/500");
+                        }
+                    })
                     mailer.sendMail(user.email, "Reset password", `Reset Pass: ${resetPass}`)
                     console.log(`${process.env.APP_URL}/password/reset/${user.email} ${resetPass}`);
                 })
@@ -72,6 +79,13 @@ exports.change = (req, res) => {
                 bcrypt.hash(passwordNew, parseInt(process.env.BCRYPT_SALT_ROUND)).then((hashedPassword) => {
                     User.resetPassword(req.session.user.email, hashedPassword, (err, result) => {
                         if (!err) {
+                            //res.redirect('/login');
+                        } else {
+                            res.redirect("/500");
+                        }
+                    })
+                    User.updateisForgotPasswordStatus0(req.session.user.email, (err, result) => {
+                        if (!err) {
                             res.redirect('/login');
                         } else {
                             res.redirect("/500");
@@ -97,15 +111,24 @@ exports.reset = (req, res) => {
         bcrypt.compare(email, token, (err, result) => {
             console.log('compare', result);
             if (result == true) {
-                bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT_ROUND)).then((hashedPassword) => {
-                    User.resetPassword(email, hashedPassword, (err, result) => {
-                        if (!err) {
-                            res.redirect('/login');
-                        } else {
-                            res.redirect("/500");
-                        }
-                    })
+                User.updateisForgotPasswordStatus(email, (err, result) => {
+                    console.log('ok');
+                    if (!err) {
+                        bcrypt.hash(password, parseInt(process.env.BCRYPT_SALT_ROUND)).then((hashedPassword) => {
+                            User.resetPassword(email, hashedPassword, (err, result) => {
+                                if (!err) {
+                                    res.redirect('/login');
+                                } else {
+                                    res.redirect("/500");
+                                }
+                            })
+                        })
+                    } else {
+                        res.redirect("/500");
+                    }
                 })
+                
+                
             } else {
                 res.redirect('/password/reset');
             }

@@ -17,7 +17,13 @@ exports.login = (req, res) => {
                     if (result == true) {
                         req.session.loggedin = true;
                         req.session.user = user;
-                        res.redirect('/home');
+                        if (req.session.user.isForgot == '1'){
+                            res.redirect('/password/changepass')
+                        }
+                        else{
+                            res.redirect('/home');
+                        }
+                        
                     } else {
                         // A user with that email address does not exists
                         const conflictError = 'Tài khoản hoặc mật khẩu không đúng.';
@@ -28,7 +34,7 @@ exports.login = (req, res) => {
         })
     } else {
         // A user with that email address does not exists
-        const conflictError = 'User credentials are not valid.';
+        const conflictError = 'Tài khoản hoặc mật khẩu không đúng.';
         res.render('auth/login', { email, password, conflictError });
     }
 }
