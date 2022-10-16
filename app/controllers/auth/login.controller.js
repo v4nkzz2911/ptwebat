@@ -17,11 +17,34 @@ exports.login = (req, res) => {
                     if (result == true) {
                         req.session.loggedin = true;
                         req.session.user = user;
+                           
                         if (req.session.user.isForgot == '1'){
                             res.redirect('/password/changepass')
                         }
                         else{
-                            res.redirect('/home');
+                            //res.redirect('/home');
+                            if (req.session.user.role =='0'){
+                                req.session.user.MenuBarItem = [
+                                    {
+                                        label: 'Trang chủ',
+                                        link:'/',
+                                        active:'0'
+                                    },
+                                    {
+                                        label:'Quản lý người dùng',
+                                        link:'/user/manager',
+                                        active:'0',
+                                    },
+                                    {
+                                        label:'Quản lý yêu cầu',
+                                        link:'',
+                                        active:'0',
+                                    },
+                                ];
+                                req.session.user.roleName ='Admin';
+                            }
+
+                            res.redirect('/home') 
                         }
                         
                     } else {

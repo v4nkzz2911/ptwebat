@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 11, 2022 lúc 10:08 AM
+-- Thời gian đã tạo: Th10 16, 2022 lúc 06:53 AM
 -- Phiên bản máy phục vụ: 10.1.40-MariaDB
 -- Phiên bản PHP: 7.3.5
 
@@ -21,6 +21,24 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `ptwebat`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `permission`
+--
+
+CREATE TABLE `permission` (
+  `email` varchar(200) NOT NULL,
+  `per` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `permission`
+--
+
+INSERT INTO `permission` (`email`, `per`) VALUES
+('vietanhtmpro@gmail.com', '100');
 
 -- --------------------------------------------------------
 
@@ -49,19 +67,28 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `email_verified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `phone` varchar(10) NOT NULL,
-  `address` varchar(200) NOT NULL
+  `address` varchar(200) NOT NULL,
+  `isForgot` varchar(10) NOT NULL,
+  `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `password`, `email`, `email_verified_at`, `phone`, `address`) VALUES
-(3, 'megumisatellizer', 'Anh Hoang', '$2b$10$e5eW1uHtNbhHhX3SeQXDeuzr8Gu3qgXbTD2YflnajxCISUZoN3KVu', 'vietanhtmpro@gmail.com', '2022-10-10 16:20:53', '0352275909', 'Tan Trieu - Thanh Tri');
+INSERT INTO `users` (`id`, `username`, `name`, `password`, `email`, `email_verified_at`, `phone`, `address`, `isForgot`, `role`) VALUES
+(3, 'megumisatellizer', 'Anh Hoang', '$2b$10$2dURNPIPrJ0M1.aJflgqf.8Y2WP9S0dL3UPlBbNU14X2qFkp0tmOO', 'vietanhtmpromax@gmail.com', '2022-10-15 09:42:13', '0352275909', 'Tan Trieu - Thanh Tri', '0', '0'),
+(5, 'megumisatellizer', 'Anh Hoang', '$2b$10$PrE1FvpPggmUMY/FktjW6.vDwBJqlJ6rCljBdvo1LrWaUcQSORGu.', 'vietanhtmpro@gmail.com', '2022-10-15 10:22:11', '0352275909', 'Tan Trieu - Thanh Tri', '0', '1');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `permission`
+--
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Chỉ mục cho bảng `todo`
@@ -89,7 +116,7 @@ ALTER TABLE `todo`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

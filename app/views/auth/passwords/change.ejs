@@ -5,21 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đổi mật khẩu</title>
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/changepass.css">
 </head>
 <body>
-    <div class="login-form">
-        <h1>Đổi mật khẩu</h1>
-        <form action="/password/changepass" method="POST">
-            <input type="password" name="passwordOld" placeholder="Mật khẩu hiện tại" required>
-            <input type="password" name="passwordNew" placeholder="Mật khẩu mới" required>
-            <input type="password" name="passwordRetype" placeholder="Nhập lại mật khẩu" required>
-            <% if (typeof conflictError != "undefined" && conflictError) { %>
-                <div class="text-danger text-left  mb-3"><%= conflictError %></div>
-            <% } %>
-            <input type="submit" value="Thực hiện">
-            <button onclick="location.href='http://localhost:3000'" class="return-button">Trở lại</button>
-        </form>
+    <div class="page">
+        <div class="login-form">
+            <div class="top">
+                <h1>Đổi mật khẩu</h1>
+                <h2>Vui lòng nhập thông tin vào ô bên dưới</h>
+            </div>
+            <div class="info">
+                <form action="/password/changepass" method="POST">
+                    <input type="password" name="passwordOld" placeholder="Mật khẩu hiện tại" required>
+                    <input type="password" name="passwordNew" placeholder="Mật khẩu mới" required>
+                    <input type="password" name="passwordRetype" placeholder="Nhập lại mật khẩu" required>
+                    <% if (typeof conflictError != "undefined" && conflictError) { %>
+                        <div class="text-danger text-left  mb-3"><%= conflictError %></div>
+                    <% } %>
+                    <div class="button">
+                        <button onclick="location.href='http://localhost:3000'" class="return-button">Trở lại</button>
+                        <input type="submit" value="Thay đổi">      
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
     </div>
+
 </body>
 </html>

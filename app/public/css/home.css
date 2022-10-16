@@ -1,0 +1,108 @@
+::selection{
+    background: #2D2F36;
+}
+::-moz-selection{
+    background: #2D2F36;
+}
+
+body {
+    background: white;
+    background-image: url(./background2.jpg);
+    background-size: 100%;
+    font-family: 'Inter UI', sans-serif;
+    margin: 0;
+}
+
+.page {
+    
+    flex-direction: column;
+    height: 100%;
+    position: absolute;
+    place-content: center;
+    width: 100%;
+}
+.header{
+    display: flex;
+    margin: auto;
+    height: 7%;
+    width: 100%;
+    background-color:#474A59;
+}
+.left{
+    margin: auto;
+    margin-left: 20px;
+    color: #fff;
+}
+.right{
+    display: flex;
+    margin: auto;
+    margin-right: 0px;
+    width: 25%;
+    color: #fff;
+}
+.right h1{
+    margin-left:25px ;
+    font-size: 15px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.link {
+    margin: auto;
+    margin-right:25px ;
+    font-size: 15px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+.link a{
+    color: #fff;
+    margin-left: 5px;
+}
+.center{
+    width: 95%;
+    margin-left: 40px;
+    display: flex;
+    background-color: antiquewhite;
+    height: 90%;
+    opacity: 0.7;
+}
+.footer{
+    height: 3%;
+    background-color: #474A59;
+}
+
+ .navbar{
+    position: fixed;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: left;
+    
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .navbar li {
+    float: left;
+  }
+  
+  .navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .navbar li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .navbar .active {
+    background-color: #04AA6D;
+  }

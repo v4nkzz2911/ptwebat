@@ -3,11 +3,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const expressLayouts = require('express-ejs-layouts');
+
 require('dotenv/config');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 app.set('views', 'app/views');
+app.set('layout','./partials/layout')
 
 app.use(express.static('app/public'));
 app.use(express.json());

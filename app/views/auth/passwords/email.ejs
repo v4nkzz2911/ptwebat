@@ -5,16 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quên mật khẩu</title>
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/Forgot.css">
 </head>
 <body>
-    <div class="login-form">
-        <h1>Quên mật khẩu</h1>
-        <form action="/password/email" method="POST">
-            <input type="text" name="email" placeholder="Email" 
-                <% if (typeof email != "undefined" && email) { %> value="<%= email %>"<% } %>  required>
-            <input type="submit" value="Thực hiện">
-        </form>
+    <div class="page">
+        <div class="login-form">
+            <div class="top">
+                <h1>Đặt lại mật khẩu</h1>
+                <h2>Vui lòng nhập email để nhận lại mật khẩu mới</h>
+            </div>
+            
+            <div class=" info">            
+                <form action="/password/email" method="POST">
+                    <input type="text" name="email" placeholder="Email" 
+                        <% if (typeof email != "undefined" && email) { %> value="<%= email %>"<% } %>  required>
+                    <input type="submit" value="Gửi">
+                </form>
+            </div>
+
+        </div>
     </div>
+
 </body>
 </html>

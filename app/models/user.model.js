@@ -23,6 +23,21 @@ User.create = (newUser, result) => {
     });
 };
 
+
+
+User.showAll = (result) => {
+    let query = "SELECT * FROM users";
+    sql.query(query, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        console.log("todo: ", res);
+        result(null, res);
+    });
+};
+
 User.findByEmail = (email, result) => {
     sql.query(`SELECT * from users WHERE email = '${email}'`, (err, res) => {
         if (err) {
@@ -126,5 +141,7 @@ User.updateisForgotPasswordStatus0 = (email, result) => {
         }
     );
 };
+
+
 
 module.exports = User;
