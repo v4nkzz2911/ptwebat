@@ -43,9 +43,54 @@ exports.login = (req, res) => {
                                 ];
                                 req.session.user.roleName ='Admin';
                             }
+                            else {
+                                if (req.session.user.role =='1'){
+                                    req.session.user.MenuBarItem = [
+                                        {
+                                            label: 'Trang chủ',
+                                            link:'/',
+                                            active:'0'
+                                        },
+                                        {
+                                            label:'Quản lý khách hàng',
+                                            link:'',
+                                            active:'0',
+                                        },
+                                        {
+                                            label:'Quản lý khảo sát',
+                                            link:'',
+                                            active:'0',
+                                        },
+                                    ];
+                                    req.session.user.roleName ='Nhân Viên';
+                                }
 
+                                else {
+                                    if (req.session.user.role =='2'){
+                                        req.session.user.MenuBarItem = [
+                                            {
+                                                label: 'Trang chủ',
+                                                link:'/',
+                                                active:'0'
+                                            },
+                                            {
+                                                label:'Thực hiện khảo sát',
+                                                link:'',
+                                                active:'0',
+                                            },
+                                            {
+                                                label:'Tạo khảo sát',
+                                                link:'',
+                                                active:'0',
+                                            },
+                                        ];
+                                        req.session.user.roleName ='Khách Hàng';
+                                    }
+                                }
+                            }
+                        } 
                             res.redirect('/home') 
-                        }
+                            
                         
                     } else {
                         // A user with that email address does not exists
