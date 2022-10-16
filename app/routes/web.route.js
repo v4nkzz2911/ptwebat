@@ -4,7 +4,15 @@ module.exports = app => {
     var router = require('express').Router();
 
     router.get('/home', authMiddleware.loggedin, (req, res) => {
-        res.render('home');
+        if (req.session.user.isForgot =="1"){
+            const conflictError = "Bạn phải đổi mật khẩu sau khi quên mật khẩu";
+            res.render("auth/passwords/change",{
+                conflictError
+            })
+        } else{
+            res.render('home');
+        }
+        
     });
 
     app.use(router);

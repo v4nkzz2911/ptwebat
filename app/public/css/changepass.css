@@ -96,3 +96,8 @@ display: flex;
     cursor: pointer;
     color: #fff;
 }
+
+.text-danger{
+    margin-top: 15px;
+    color: yellow;
+}

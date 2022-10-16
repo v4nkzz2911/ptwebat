@@ -42,6 +42,7 @@ exports.login = (req, res) => {
                                     },
                                 ];
                                 req.session.user.roleName ='Admin';
+                                res.redirect('/home')
                             }
                             else {
                                 if (req.session.user.role =='1'){
@@ -63,6 +64,7 @@ exports.login = (req, res) => {
                                         },
                                     ];
                                     req.session.user.roleName ='Nhân Viên';
+                                    res.redirect('/home')
                                 }
 
                                 else {
@@ -85,11 +87,12 @@ exports.login = (req, res) => {
                                             },
                                         ];
                                         req.session.user.roleName ='Khách Hàng';
+                                        res.redirect('/home')
                                     }
                                 }
                             }
                         } 
-                            res.redirect('/home') 
+                             
                             
                         
                     } else {
